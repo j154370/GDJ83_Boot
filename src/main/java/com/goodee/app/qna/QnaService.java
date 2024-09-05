@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.goodee.app.util.Pager;
 
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Transactional(rollbackFor = Exception.class)
 public class QnaService {
 
 	@Autowired
@@ -22,6 +24,7 @@ public class QnaService {
 		
 		return qnaMapper.getList(pager);
 	}
+	
 	
 	public int add(QnaVO qnaVO) throws Exception{
 		log.info("============== before board_num : {}", qnaVO.getBoard_num());
