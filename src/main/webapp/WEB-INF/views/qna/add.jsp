@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +10,18 @@
 <body>
 
 	<h1>QNA Add</h1>
-	<form action="" method="post" enctype="multipart/form-data">
-		<input type="text" name="board_title">
-		<input type="text" name="board_writer">
-		<textarea name="board_contents"></textarea>
-		<input type="file" name="attaches">
-		<input type="file" name="attaches">
-		<input type="file" name="attaches">
+	
+	<form:form modelAttribute="qnaVO">
+	<!-- path는 VO의 getter setter 이름 -->
+		<form:input path="board_title"/><br>
+		<form:errors path="board_title"></form:errors><br>
+		<form:input path="board_writer"/><br>
+		<form:errors path="board_writer"></form:errors><br>
+		<form:textarea path="board_contents"/><br>
+		<input type="file" name="attaches"><br>
+		<input type="file" name="attaches"><br>
+		<input type="file" name="attaches"><br>
 		<button>Add</button>
-	</form>
+	</form:form>
 </body>
 </html>
