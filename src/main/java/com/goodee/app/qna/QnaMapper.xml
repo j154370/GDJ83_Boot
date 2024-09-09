@@ -4,6 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.goodee.app.qna.QnaMapper">
+	<insert id="addFile" parameterType="QnaFileVO">
+		INSERT INTO QNAFILES (FILE_NAME, ORI_NAME, BOARD_NUM)
+		VALUES(#{file_name}, #{ori_name}, #{board_num})
+	</insert>
+
+
 	<select id="getList" resultType="QnaVO" parameterType="Pager">
 		SELECT * FROM QNA
 		<if test="kind =='k1'">

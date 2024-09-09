@@ -9,10 +9,13 @@
 <body>
 
 	<h1>QNA Add</h1>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<input type="text" name="board_title">
 		<input type="text" name="board_writer">
 		<textarea name="board_contents"></textarea>
+		<input type="file" name="attaches">
+		<input type="file" name="attaches">
+		<input type="file" name="attaches">
 		<button>Add</button>
 	</form>
 </body>
