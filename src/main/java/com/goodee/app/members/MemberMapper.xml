@@ -38,4 +38,9 @@
 		INSERT INTO MEMBER_ROLE
 		VALUES (#{username}, #{role_num})
 	</insert>
+	
+	<update id="pwUpdate" parameterType="MemberVO">
+		UPDATE MEMBERS SET PASSWORD = #{password}
+		WHERE USERNAME = #{username}
+	</update>
 </mapper>

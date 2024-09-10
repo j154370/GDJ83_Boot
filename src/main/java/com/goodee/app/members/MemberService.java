@@ -4,15 +4,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 @Service
-public class MemberService {
+public class MemberService implements UserDetailsService{
 	
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		MemberVo memberVo = new MemberVo();
+		memberVo.setUsername(username);
+		try {
+			memberVo = memberMapper.detail(memberVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return memberVo;
+	}
+
+
 	// 검증 메서드
 	public boolean memberValidate(MemberVo memberVo, BindingResult bindingResult) throws Exception{
 		boolean check = false;
@@ -40,6 +63,10 @@ public class MemberService {
 	
 	
 	public int add(MemberVo memberVo) throws Exception{
+		
+		// 회원가입시 DB에 비밀번호를 넣기 전에 암호화 하는 과정
+		memberVo.setPassword(passwordEncoder.encode(memberVo.getPassword()));
+		
 		int result = memberMapper.add(memberVo);
 		
 		Map<String, Object> map = new HashMap<>();
