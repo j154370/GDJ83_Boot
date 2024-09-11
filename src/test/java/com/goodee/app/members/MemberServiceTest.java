@@ -19,8 +19,8 @@ class MemberServiceTest {
 	@Test
 	void test() throws Exception{
 		MemberVo memberVo = new MemberVo();
-		memberVo.setUsername("mindllre96");
-		memberVo.setPassword(passwordEncoder.encode("mindllre96"));
+		memberVo.setUsername("admin");
+		memberVo.setPassword(passwordEncoder.encode("123123"));
 		int result = memberMapper.pwUpdate(memberVo);
 		assertEquals(1, result);
 	}

@@ -23,7 +23,7 @@ public class MemberVo implements UserDetails{
 	
 	@NotBlank(groups = {MemberAddGroup.class, MemberUpdateGroup.class})
 	private String username;
-	@Pattern(groups= {MemberAddGroup.class}, regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*\\\\W)(?=\\\\S+$).{6,12}")
+	//@Pattern(groups= {MemberAddGroup.class}, regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*\\\\W)(?=\\\\S+$).{6,12}")
 	@NotBlank(groups= {MemberAddGroup.class})
 	private String password;
 	private String passwordCheck;
@@ -59,10 +59,6 @@ public class MemberVo implements UserDetails{
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-	
-	public boolean isEnabled() {
 		return true;
 	}
 	
