@@ -4,10 +4,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.goodee.app.validate.MemberAddGroup;
 import com.goodee.app.validate.MemberUpdateGroup;
@@ -19,7 +21,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class MemberVo implements UserDetails{
+public class MemberVo implements UserDetails, OAuth2User{
 	
 	@NotBlank(groups = {MemberAddGroup.class, MemberUpdateGroup.class})
 	private String username;
@@ -35,6 +37,9 @@ public class MemberVo implements UserDetails{
 	private Date birth;
 	private boolean enabled;
 	private List<RoleVO> vos;
+	// Oauth2User
+	// token 정보 저장
+	private Map<String, Object> attributes;
 	
 	
 	
@@ -61,6 +66,13 @@ public class MemberVo implements UserDetails{
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
+	
+	// 소셜 로그인 오버라이드
+	@Override
+	public Map<String, Object> getAttributes() {
+		return this.attributes;
+	}
+	
 	
 	
 

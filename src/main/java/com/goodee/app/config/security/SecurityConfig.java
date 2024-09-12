@@ -86,6 +86,7 @@ public class SecurityConfig {
 						logout ->
 							logout
 								  .logoutUrl("/member/logout") 	// 로그아웃으로 사용할 url 지정
+								  .logoutSuccessHandler(null)
 								  .logoutSuccessUrl("/") 	// 로그아웃 성공시 이동할 url
 								  .invalidateHttpSession(true) 	// true면 session 만료
 								  //.deleteCookies(null) 쿠키 삭제
@@ -111,6 +112,16 @@ public class SecurityConfig {
 										  // 세션이 만료되었을 경우 redirect할 URL
 										  .expiredUrl("/member/login")
 						)
+				
+				// 소셜 로그인
+				.oauth2Login(
+						oauth2 ->
+							oauth2
+								  .userInfoEndpoint(
+										  	user -> user.userService(memberUserService)
+										  )
+						)
+				
 				
 		
 		
