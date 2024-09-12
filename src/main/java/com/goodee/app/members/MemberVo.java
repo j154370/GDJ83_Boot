@@ -40,6 +40,8 @@ public class MemberVo implements UserDetails, OAuth2User{
 	// Oauth2User
 	// token 정보 저장
 	private Map<String, Object> attributes;
+	private String accessToken;
+	private String sns;
 	
 	
 	

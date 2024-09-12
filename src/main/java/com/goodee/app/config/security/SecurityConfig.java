@@ -26,6 +26,9 @@ public class SecurityConfig {
 	private SecurityLoginFailHandler handler2;
 	
 	@Autowired
+	private SecurityLogoutSuccessHandler handler3;
+	
+	@Autowired
 	private MemberUserService memberUserService;
 	
 	@Bean
@@ -86,8 +89,8 @@ public class SecurityConfig {
 						logout ->
 							logout
 								  .logoutUrl("/member/logout") 	// 로그아웃으로 사용할 url 지정
-								  .logoutSuccessHandler(null)
-								  .logoutSuccessUrl("/") 	// 로그아웃 성공시 이동할 url
+								  .logoutSuccessHandler(handler3)
+								  //.logoutSuccessUrl("/") 	// 로그아웃 성공시 이동할 url
 								  .invalidateHttpSession(true) 	// true면 session 만료
 								  //.deleteCookies(null) 쿠키 삭제
 						)
